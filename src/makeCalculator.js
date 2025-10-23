@@ -4,51 +4,39 @@
  * @return {object}
  */
 function makeCalculator() {
-  // write code here
-  let result = 0;
-
   const calculator = {
-    result: result,
+    _result: 0,
+
+    get result() {
+      return this._result;
+    },
 
     add(number) {
-      result += number;
-      calculator.result = result;
-
-      return calculator;
+      return this._result + number;
     },
 
     subtract(number) {
-      result -= number;
-      calculator.result = result;
-
-      return calculator;
-    },
-
-    divide(number) {
-      result /= number;
-      calculator.result = result;
-
-      return calculator;
+      return this._result - number;
     },
 
     multiply(number) {
-      result *= number;
-      calculator.result = result;
+      return this._result * number;
+    },
 
-      return calculator;
+    divide(number) {
+      return this._result / number;
     },
 
     operate(action, number) {
-      action(number);
+      this._result = action.call(this, number);
 
-      return calculator;
+      return this;
     },
 
     reset() {
-      result = 0;
-      calculator.result = result;
+      this._result = 0;
 
-      return calculator;
+      return this;
     },
   };
 
